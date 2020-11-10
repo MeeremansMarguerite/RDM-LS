@@ -1,0 +1,73 @@
+---
+title: "Hormone_analysis_report"
+author: "MM"
+date: "10-11-2020"
+output: html_document
+Bibliography: literature/Bibliopraghy.bib
+---
+
+# Analysis of hormone project
+
+This script analysze the dataset of the hormone experiment performend on
+It contains
+
+Here is a reference to a paper [@misc{Schmid-Grendelmeier2001]
+
+## 1. Import libraries
+Install the packages and load in the libraries
+
+```{r, warning=FALSE}
+# install.packages("ggplot2")
+library(ggplot2)
+```
+
+
+## 2. Data analysis
+
+### 2.1 Import samples
+```{r, results='hide'}
+Hormone <- read.csv2("data/20201110_Hormone.csv")
+names(Hormone)[3] <- "Concentration"
+Hormone
+```
+
+```{r}
+summary(Hormone)
+```
+
+### 2.2 Create figures
+Create plot effect of drup A ad B on concentration of substance X measured in blood. 
+
+```{r, fig.cap="Results",fig.width=3, fig.height=1.5}
+ggplot(Hormone, aes(Drug,Concentration)) +
+	          stat_summary(fun=mean,geom="bar") +
+		              stat_summary(fun.data=mean_cl_normal,geom="errorbar",
+					                                           width=0.25) + geom_point() +
+  coord_flip()
+
+```
+
+## 3. Discussion
+There is a clear influence present.
+
+## 4. Conclusion
+
+
+## 5. Final notes
+This report was created with r version: `r getRversion()`. The following packages were used for the analysis. 
+
+```{r}
+sessionInfo()
+```
+
+
+
+
+
+
+
+
+
+
+
+
